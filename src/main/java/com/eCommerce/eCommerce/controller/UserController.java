@@ -17,6 +17,7 @@ import com.eCommerce.eCommerce.model.User;
 import com.eCommerce.eCommerce.service.UserService;
 import com.eCommerce.eCommerce.service.requests.users.CreateUserRequest;
 import com.eCommerce.eCommerce.service.requests.users.UpdateUserRequest;
+import com.eCommerce.eCommerce.service.responses.users.GetAllUsersResponse;
 
 @RestController
 @RequestMapping("api/users")
@@ -30,8 +31,8 @@ public class UserController {
 	}
 	
 	@GetMapping("/getall")
-	public List<User> getAllUsers() {
-		this.userService.getAllUser();
+	public List<GetAllUsersResponse> getAllUsers() {
+		return this.userService.getAllUser();
 	}
 	
 	@GetMapping("/getById/{id}")
