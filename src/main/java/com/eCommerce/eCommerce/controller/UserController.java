@@ -19,7 +19,6 @@ import com.eCommerce.eCommerce.model.User;
 import com.eCommerce.eCommerce.service.UserService;
 import com.eCommerce.eCommerce.service.requests.users.CreateUserRequest;
 import com.eCommerce.eCommerce.service.requests.users.UpdateUserRequest;
-import com.eCommerce.eCommerce.service.responses.users.GetUserResponse;
 
 @RestController
 @RequestMapping("api/users")
@@ -52,13 +51,13 @@ public class UserController {
 		return ResponseEntity.ok(this.userService.updateUser(updateUserRequest));
 	}
 	
-	@PatchMapping("/{id}")
-	public void deactiveUser(@PathVariable("id") Long id) {
-		this.userService.deactiveUser(id);
-	}
-	
-	@DeleteMapping("/{id}")
-	public void deleteUser(@PathVariable("id") Long id) {
-		this.userService.deleteUser(id);
-	}
+//	@PatchMapping("/{id}")
+//	public void deactiveUser(@PathVariable("id") Long id) {
+//		this.userService.deactiveUser(id);
+//	}
+//	
+//	@DeleteMapping("/{id}")
+//	public void deleteUser(@PathVariable("id") Long id) {
+//		this.userService.deleteUser(id);
+//	}
 }
