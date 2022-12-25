@@ -40,7 +40,7 @@ public class UserService {
 	public UserDto createUser(CreateUserRequest createUserRequest) {
 		User user = new User(createUserRequest.getEmail(),createUserRequest.getFirstName(),
 				             createUserRequest.getLastName(), createUserRequest.getPostalCode());
-		return this.userConverter.convert(user);
+		return this.userConverter.convert(userRepository.save(user));
 	}
 	
 	public UserDto updateUser(UpdateUserRequest updateUserRequest) {
