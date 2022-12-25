@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eCommerce.eCommerce.dto.UserDto;
 import com.eCommerce.eCommerce.model.User;
 import com.eCommerce.eCommerce.service.UserService;
 import com.eCommerce.eCommerce.service.requests.users.CreateUserRequest;
 import com.eCommerce.eCommerce.service.requests.users.UpdateUserRequest;
-import com.eCommerce.eCommerce.service.responses.users.GetAllUsersResponse;
+import com.eCommerce.eCommerce.service.responses.users.GetUserResponse;
 
 @RestController
 @RequestMapping("api/users")
@@ -32,12 +33,12 @@ public class UserController {
 	}
 	
 	@GetMapping("/getall")
-	public ResponseEntity<List<GetAllUsersResponse>> getAllUsers() {
+	public ResponseEntity<List<UserDto>> getAllUsers() {
 		return ResponseEntity.ok(this.userService.getAllUser());
 	}
 	
 	@GetMapping("/getById/{id}")
-	public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+	public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long id) {
 		return ResponseEntity.ok(this.userService.getUserById(id));
 	}
 	
