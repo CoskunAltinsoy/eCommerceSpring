@@ -3,6 +3,7 @@ package com.eCommerce.eCommerce.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -31,13 +32,13 @@ public class UserController {
 	}
 	
 	@GetMapping("/getall")
-	public List<GetAllUsersResponse> getAllUsers() {
-		return this.userService.getAllUser();
+	public ResponseEntity<List<GetAllUsersResponse>> getAllUsers() {
+		return ResponseEntity.ok(this.userService.getAllUser());
 	}
 	
 	@GetMapping("/getById/{id}")
-	public User getUserById(@PathVariable("id") Long id) {
-		this.userService.getUserById(id);
+	public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+		return ResponseEntity.ok(this.userService.getUserById(id));
 	}
 	
 	@PostMapping("/create")
