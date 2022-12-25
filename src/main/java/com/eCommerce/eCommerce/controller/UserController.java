@@ -48,8 +48,8 @@ public class UserController {
 	}
 	
 	@PutMapping("/{id}")
-	public void updateUser(@RequestBody UpdateUserRequest updateUserRequest) {
-		this.userService.updateUser(updateUserRequest);
+	public ResponseEntity<UserDto> updateUser(@RequestBody UpdateUserRequest updateUserRequest) {
+		return ResponseEntity.ok(this.userService.updateUser(updateUserRequest));
 	}
 	
 	@PatchMapping("/{id}")
