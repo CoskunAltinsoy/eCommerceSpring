@@ -71,6 +71,7 @@ public class UserService {
 	}
 	
 	public void deleteUser(Long id) {
+		checkIfUserExist(id);
 		this.userRepository.deleteById(id);
 	}
 	
@@ -85,5 +86,12 @@ public class UserService {
 			logger.warn(String.format("The user wanted update is not active %s", user.getEmail()));
 			throw new UserNotActiveException("User Is Not Active");
 		}
+	}
+	
+	private void checkIfUserExist(Long id) {
+		if(!userRepository.existsById(id)) {
+			throw new UserNotFoundException("User couldn't be found");
+		}
+		
 	}
 }
