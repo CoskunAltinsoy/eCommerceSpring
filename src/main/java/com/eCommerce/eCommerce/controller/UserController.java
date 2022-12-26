@@ -46,18 +46,26 @@ public class UserController {
 		return ResponseEntity.ok(this.userService.createUser(createUserRequest));
 	}
 	
-	@PutMapping("/{id}")
+	@PutMapping("/update")
 	public ResponseEntity<UserDto> updateUser(@RequestBody UpdateUserRequest updateUserRequest) {
 		return ResponseEntity.ok(this.userService.updateUser(updateUserRequest));
 	}
 	
-//	@PatchMapping("/{id}")
-//	public void deactiveUser(@PathVariable("id") Long id) {
-//		this.userService.deactiveUser(id);
-//	}
-//	
-//	@DeleteMapping("/{id}")
-//	public void deleteUser(@PathVariable("id") Long id) {
-//		this.userService.deleteUser(id);
-//	}
+	@PatchMapping("/{id}")
+	public ResponseEntity<Void> deactiveUser(@PathVariable("id") Long id) {
+		this.userService.deactiveUser(id);
+	    return (ResponseEntity<Void>) ResponseEntity.ok();
+	}
+	
+	@PatchMapping("/{id}")
+	public ResponseEntity<Void> activeUser(@PathVariable("id") Long id) {
+		this.userService.activeUser(id);
+		 return (ResponseEntity<Void>) ResponseEntity.ok();
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) {
+		this.userService.deleteUser(id);
+		return (ResponseEntity<Void>) ResponseEntity.ok();
+	}
 }

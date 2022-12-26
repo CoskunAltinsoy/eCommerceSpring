@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 public class User extends BaseEntity {
 
-	@Column(name = "email")
+	@Column(name = "email",unique = true)
 	private String email;
 	
 	@Column(name = "first_name")
@@ -28,6 +28,9 @@ public class User extends BaseEntity {
 	
 	@Column(name = "postal_code")
 	private String postalCode;
+	
+	@Column(name = "is_active")
+	private Boolean isActive;
 	
 	
 }
