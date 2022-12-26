@@ -33,9 +33,10 @@ public class UserService {
 		this.userConverter = userConverter;
 	}
 	
-	public List<UserDto> getAllUser() {
-		return this.userRepository.findAll().stream().map(u -> userConverter.convert(u))
-				                                           .collect(Collectors.toList());
+	public List<UserDto> getAllUsers() {
+//		return this.userRepository.findAll().stream().map(u -> userConverter.convert(u))
+//				                                           .collect(Collectors.toList());
+		return this.userConverter.convert(userRepository.findAll());
 	}
 	
 	public UserDto getUserById(Long id) {
