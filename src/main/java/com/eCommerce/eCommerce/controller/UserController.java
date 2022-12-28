@@ -57,11 +57,11 @@ public class UserController {
 	    return (ResponseEntity<Void>) ResponseEntity.ok();
 	}
 	
-	@PatchMapping("/{id}")
-	public ResponseEntity<Void> activeUser(@PathVariable("id") Long id) {
-		this.userService.activeUser(id);
-		 return (ResponseEntity<Void>) ResponseEntity.ok();
-	}
+//	@PatchMapping("/{id}")
+//	public ResponseEntity<Void> activeUser(@PathVariable("id") Long id) {
+//		this.userService.activeUser(id);
+//		 return (ResponseEntity<Void>) ResponseEntity.ok();
+//	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) {

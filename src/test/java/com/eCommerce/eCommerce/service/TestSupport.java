@@ -26,6 +26,25 @@ public class TestSupport {
 		                        	from.getEmail(),
 		                        	from.getFirstName(),
 		                        	from.getLastName(),
-		                        	from.getPostalCode())).collect(Collectors.toList());
+		                        	from.getPostalCode(),
+		                        	from.getIsActive())).collect(Collectors.toList());
+	}
+	
+	public static User generateUser(Long id) {
+		return new User(
+				"coskun.altinsoy@gmail.com",
+                "firstName",
+                "lastName",
+                "postalcode",
+                true);
+	}
+	
+	public static UserDto generateUserDto(Long id) {
+		return new UserDto(id,
+				"coskun.altinsoy@gmail.com",
+                "firstName",
+                "lastName",
+                "postalcode",
+                true);
 	}
 }

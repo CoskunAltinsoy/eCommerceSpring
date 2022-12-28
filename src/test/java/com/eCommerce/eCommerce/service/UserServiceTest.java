@@ -42,6 +42,22 @@ class UserServiceTest extends TestSupport{
 		
 		Mockito.verify(userRepository).findAll();
 		Mockito.verify(userConverter).convert(userList);
+	}
+	
+	@Test
+	void testGetUserByEmail_whenUserIdExist_itShouldReturnUserDto() {
+		List<User> userList = generateUsers();
+		List<UserDto> userDtoList = generateUserDtoList(userList);
+		
+		Mockito.when(userRepository.findAll()).thenReturn(userList);
+		Mockito.when(userConverter.convert(userList)).thenReturn(generateUserDtoList(userList));
+		
+		List<UserDto> result = userService.getAllUsers();
+		
+		assertEquals(result, userDtoList);
+		
+		Mockito.verify(userRepository).findAll();
+		Mockito.verify(userConverter).convert(userList);
 	
 	}
 

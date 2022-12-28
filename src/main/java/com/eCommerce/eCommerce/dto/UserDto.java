@@ -13,4 +13,5 @@ public class UserDto {
     private String firstName;
 	private String lastName;
 	private String postalCode;
+	private boolean isActive;
 }
