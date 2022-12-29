@@ -41,7 +41,7 @@ public class UserService {
 	
 	public UserDto getUserById(Long id) {
 		User user = findUserById(id);
-		return this.userConverter.convert(userRepository.save(user));
+		return this.userConverter.convert(user);
 	}
 	
 	public UserDto createUser(CreateUserRequest createUserRequest) {
@@ -79,6 +79,11 @@ public class UserService {
 	private User findUserById(Long id) {
 		return this.userRepository.findById(id)
 		           .orElseThrow(() -> new UserNotFoundException("User couldn't be found "+id));
+	}
+	
+	private User findUserByEmail(String email) {
+		return this.userRepository.findUserByEmail(email)
+		           .orElseThrow(() -> new UserNotFoundException("User couldn't be found "+ email));
 	}
 	
 	private void checkUserActivation(Long id) {

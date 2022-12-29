@@ -14,6 +14,7 @@ import com.eCommerce.eCommerce.model.User;
 import com.eCommerce.eCommerce.repository.UserRepository;
 import com.eCommerce.eCommerce.service.converter.UserConverter;
 import com.eCommerce.eCommerce.service.requests.users.CreateUserRequest;
+import com.eCommerce.eCommerce.service.requests.users.UpdateUserRequest;
 
 class UserServiceTest extends TestSupport{
 
@@ -46,37 +47,57 @@ class UserServiceTest extends TestSupport{
 		Mockito.verify(userConverter).convert(userList);
 	}
 	
-//	@Test
-//	void testGetUserById_whenUserIdExist_itShouldReturnUserDto() {
-//		Long id = 1L;
-//		User user = generateUser();
-//		UserDto userDto = generateUserDto(id);
-//		
-//		Mockito.when(userRepository.findById(id)).thenReturn(Optional.of(user));
-//		Mockito.when(userConverter.convert(user)).thenReturn(userDto);
-//		
-//		UserDto result = userService.getUserById(id);
-//		
-//		assertEquals(result.getEmail(), userDto.getEmail());
-//		
-//		Mockito.verify(userRepository).findById(id);
-//		Mockito.verify(userConverter).convert(user);
-//	
-//	}
+	@Test
+	void testGetUserById_whenUserIdExist_itShouldReturnUserDto() {
+		Long id = 1L;
+		User user = generateUser(id);
+		UserDto userDto = generateUserDto(id);
+		
+		Mockito.when(userRepository.findById(id)).thenReturn(Optional.of(user));
+		Mockito.when(userConverter.convert(user)).thenReturn(userDto);
+		
+		UserDto result = userService.getUserById(id);
+		
+		assertEquals(result, userDto);
+		
+		Mockito.verify(userRepository).findById(id);
+		Mockito.verify(userConverter).convert(user);
+	
+	}
 	
 	@Test
 	public void testCreateUser_itShouldReturnCreatedUserDto() {
-		String email = "coskun.altinsoy@gmail.com";
+		String email = "firstname@gmail.com";
 		CreateUserRequest createUserRequest = 
-				new CreateUserRequest(email,"Mücahit", "Altınsoy", "06000");
-		User user = new User(email, "Mücahit", "Altınsoy", "06000", true);
-		User savedUser = new User(email, "Mücahit", "Altınsoy", "06000", true);
-		UserDto userDto = new UserDto(1L, email, "Mücahit", "Altınsoy", "06000", true);
+				new CreateUserRequest(email,"FirstName", "Lastname", "06000");
+		User user = new User(email, "FirstName", "Lastname", "06000", true);
+		User savedUser = new User(email, "FirstName", "Lastname", "06000", true);
+		UserDto userDto = new UserDto(1L, email, "FirstName", "Lastname", "06000", true);
 		
 		Mockito.when(userRepository.save(user)).thenReturn(savedUser);
 		Mockito.when(userConverter.convert(savedUser)).thenReturn(userDto);
 		
 		UserDto result = userService.createUser(createUserRequest);
+		
+		assertEquals(result, userDto);
+		
+		Mockito.verify(userRepository).save(user);
+		Mockito.verify(userConverter).convert(savedUser);
+	}
+	
+	@Test
+	public void testUpdateUser_itShouldReturnUpdatedUserDto() {
+		String email = "firstname@gmail.com";
+		UpdateUserRequest updateUserRequest = 
+				new UpdateUserRequest(1L,email,"FirstName2", "Lastname2", "06600");
+		User user = new User(1L, email, "FirstName", "Lastname", "06000", true);
+		User savedUser = new User(1L, email, "FirstName2", "Lastname2", "06600", true);
+		UserDto userDto = new UserDto(1L, email, "FirstName2", "Lastname2", "06600", true);
+		
+		Mockito.when(userRepository.save(user)).thenReturn(savedUser);
+		Mockito.when(userConverter.convert(savedUser)).thenReturn(userDto);
+		
+		UserDto result = userService.updateUser(updateUserRequest);
 		
 		assertEquals(result, userDto);
 		
