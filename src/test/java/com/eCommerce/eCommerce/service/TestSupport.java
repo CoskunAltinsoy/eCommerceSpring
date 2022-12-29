@@ -30,21 +30,21 @@ public class TestSupport {
 		                        	from.getIsActive())).collect(Collectors.toList());
 	}
 	
-	public static User generateUser(Long id) {
-		return new User(
-				"coskun.altinsoy@gmail.com",
-                "firstName",
-                "lastName",
-                "postalcode",
-                true);
-	}
-	
-	public static UserDto generateUserDto(Long id) {
-		return new UserDto(id,
-				"coskun.altinsoy@gmail.com",
-                "firstName",
-                "lastName",
-                "postalcode",
-                true);
-	}
+//	public static User generateUser() {
+//		return new User(
+//				"coskun.altinsoy@gmail.com",
+//                "firstName",
+//                "lastName",
+//                "postalcode",
+//                true);
+//	}
+//	
+//	public static UserDto generateUserDto(Long id) {
+//		return new UserDto(id,
+//				"coskun.altinsoy@gmail.com",
+//                "firstName",
+//                "lastName",
+//                "postalcode",
+//                true);
+//	}
 }
