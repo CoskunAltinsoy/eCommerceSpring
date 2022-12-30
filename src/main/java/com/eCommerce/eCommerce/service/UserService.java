@@ -81,10 +81,10 @@ public class UserService {
 		           .orElseThrow(() -> new UserNotFoundException("User couldn't be found "+id));
 	}
 	
-	private User findUserByEmail(String email) {
-		return this.userRepository.findUserByEmail(email)
-		           .orElseThrow(() -> new UserNotFoundException("User couldn't be found "+ email));
-	}
+//	private User findUserByEmail(String email) {
+//		return this.userRepository.findUserByEmail(email)
+//		           .orElseThrow(() -> new UserNotFoundException("User couldn't be found "+ email));
+//	}
 	
 	private void checkUserActivation(Long id) {
 		User user = findUserById(id);

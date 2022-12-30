@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import com.eCommerce.eCommerce.dto.UserDto;
+import com.eCommerce.eCommerce.exception.UserNotActiveException;
 import com.eCommerce.eCommerce.exception.UserNotFoundException;
 import com.eCommerce.eCommerce.model.User;
 import com.eCommerce.eCommerce.repository.UserRepository;
@@ -103,19 +104,52 @@ class UserServiceTest extends TestSupport{
 		UpdateUserRequest updateUserRequest = 
 				new UpdateUserRequest(1L,"firstname@gmail.com","FirstName2", "Lastname2", "06600");
 		User user = new User(1L, "firstname@gmail.com", "FirstName", "Lastname", "06000", true);
+		User updateUser = new User(1L, "firstname@gmail.com", "FirstName2", "Lastname2", "06600", true);
 		User savedUser = new User(1L, "firstname@gmail.com", "FirstName2", "Lastname2", "06600", true);
 		UserDto userDto = new UserDto(1L, "firstname@gmail.com", "FirstName2", "Lastname2", "06600", true);
 		
 		Mockito.when(userRepository.findById(id)).thenReturn(Optional.of(user));
-		Mockito.when(userRepository.save(user)).thenReturn(savedUser);
+		Mockito.when(userRepository.save(updateUser)).thenReturn(savedUser);
 		Mockito.when(userConverter.convert(savedUser)).thenReturn(userDto);
 		
 		UserDto result = userService.updateUser(updateUserRequest);
 		
 		assertEquals(result, userDto);
 		
-		Mockito.verify(userRepository).save(user);
+	//  Mockito.verify(userRepository).findById(id);
+		Mockito.verify(userRepository).save(updateUser);
 		Mockito.verify(userConverter).convert(savedUser);
+	}
+	
+	@Test
+	public void testUpdateUser_whenUserIdDoesNotExist_itShouldThrowUserNotFoundException() {
+		Long id = 1L;
+		UpdateUserRequest updateUserRequest = 
+				new UpdateUserRequest(1L,"firstname@gmail.com","FirstName2", "Lastname2", "06600");
+		
+		Mockito.when(userRepository.findById(id)).thenReturn(Optional.empty());
+	
+		assertThrows(UserNotFoundException.class, () -> userService.updateUser(updateUserRequest)); 
+		
+        Mockito.verify(userRepository).findById(id);
+		Mockito.verifyNoMoreInteractions(userRepository);
+		Mockito.verifyNoMoreInteractions(userConverter);
+	}
+	
+	@Test
+	public void testUpdateUser_whenUserIdExistButUserIsIdNotActive_itShouldThrowUserNotActiveException() {
+		Long id = 1L;
+		UpdateUserRequest updateUserRequest = 
+				new UpdateUserRequest(id,"firstname@gmail.com","FirstName2", "Lastname2", "06600");
+		User user = new User(id,"firstname@gmail.com","FirstName", "Lastname", "06000",false);
+		
+		Mockito.when(userRepository.findById(id)).thenReturn(Optional.of(user));
+	
+		assertThrows(UserNotActiveException.class, () -> userService.updateUser(updateUserRequest)); 
+		
+        Mockito.verify(userRepository).findById(id);
+		Mockito.verifyNoMoreInteractions(userRepository);
+		Mockito.verifyNoMoreInteractions(userConverter);
 	}
 
 }
