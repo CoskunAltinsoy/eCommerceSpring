@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import com.eCommerce.eCommerce.dto.UserDto;
+import com.eCommerce.eCommerce.exception.UserNotFoundException;
 import com.eCommerce.eCommerce.model.User;
 import com.eCommerce.eCommerce.repository.UserRepository;
 import com.eCommerce.eCommerce.service.converter.UserConverter;
@@ -62,7 +63,18 @@ class UserServiceTest extends TestSupport{
 		
 		Mockito.verify(userRepository).findById(id);
 		Mockito.verify(userConverter).convert(user);
+	}
 	
+	@Test
+	void testGetUserById_whenUserIdDoesNotExist_itShouldThrowUserNotFoundException() {
+		Long id = 1L;
+		
+		Mockito.when(userRepository.findById(id)).thenReturn(Optional.empty());
+		
+		assertThrows(UserNotFoundException.class, () -> userService.getUserById(id));
+		
+		Mockito.verify(userRepository).findById(id);
+	    Mockito.verifyNoInteractions(userConverter);
 	}
 	
 	@Test
@@ -86,14 +98,15 @@ class UserServiceTest extends TestSupport{
 	}
 	
 	@Test
-	public void testUpdateUser_itShouldReturnUpdatedUserDto() {
-		String email = "firstname@gmail.com";
+	public void testUpdateUser_whenUserIdExistAndUserIsAcive_itShouldReturnUpdatedUserDto() {
+		Long id = 1L;
 		UpdateUserRequest updateUserRequest = 
-				new UpdateUserRequest(1L,email,"FirstName2", "Lastname2", "06600");
-		User user = new User(1L, email, "FirstName", "Lastname", "06000", true);
-		User savedUser = new User(1L, email, "FirstName2", "Lastname2", "06600", true);
-		UserDto userDto = new UserDto(1L, email, "FirstName2", "Lastname2", "06600", true);
+				new UpdateUserRequest(1L,"firstname@gmail.com","FirstName2", "Lastname2", "06600");
+		User user = new User(1L, "firstname@gmail.com", "FirstName", "Lastname", "06000", true);
+		User savedUser = new User(1L, "firstname@gmail.com", "FirstName2", "Lastname2", "06600", true);
+		UserDto userDto = new UserDto(1L, "firstname@gmail.com", "FirstName2", "Lastname2", "06600", true);
 		
+		Mockito.when(userRepository.findById(id)).thenReturn(Optional.of(user));
 		Mockito.when(userRepository.save(user)).thenReturn(savedUser);
 		Mockito.when(userConverter.convert(savedUser)).thenReturn(userDto);
 		
