@@ -72,7 +72,7 @@ public class UserService {
 	}
 	
 	public void deleteUser(Long id) {
-		checkIfUserExist(id);
+		findUserById(id);
 		this.userRepository.deleteById(id);
 	}
 	
@@ -94,10 +94,4 @@ public class UserService {
 		}
 	}
 	
-	private void checkIfUserExist(Long id) {
-		if(!userRepository.existsById(id)) {
-			throw new UserNotFoundException("User couldn't be found");
-		}
-		
-	}
 }

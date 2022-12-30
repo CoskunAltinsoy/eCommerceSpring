@@ -2,6 +2,7 @@ package com.eCommerce.eCommerce.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.nio.file.attribute.UserPrincipal;
 import java.util.List;
 import java.util.Optional;
 
@@ -150,6 +151,79 @@ class UserServiceTest extends TestSupport{
         Mockito.verify(userRepository).findById(id);
 		Mockito.verifyNoMoreInteractions(userRepository);
 		Mockito.verifyNoMoreInteractions(userConverter);
+	}
+	
+	@Test
+	public void testDeactivateUser_whenUserIdExist_itShouldUpdateUserByActivateFalse() {
+		Long id = 1L;
+
+		User user = new User(id,"firstname@gmail.com","FirstName", "Lastname", "06000",true);
+		
+		Mockito.when(userRepository.findById(id)).thenReturn(Optional.of(user));
+	
+		userService.deactiveUser(id);
+
+        Mockito.verify(userRepository).findById(id);
+	}
+	
+	@Test
+	public void testDeactivateUser_whenUserIdDoesNotExist_itShouldThrowUserNotFoundException() {
+		Long id = 1L;
+		Mockito.when(userRepository.findById(id)).thenReturn(Optional.empty());
+	
+		assertThrows(UserNotFoundException.class, () -> userService.deactiveUser(id));
+
+        Mockito.verify(userRepository).findById(id);
+        Mockito.verifyNoMoreInteractions(userRepository);
+	}
+	
+	@Test
+	public void testActivateUser_whenUserIdExist_itShouldUpdateUserByActivateTrue() {
+		Long id = 1L;
+
+		User user = new User(id,"firstname@gmail.com","FirstName", "Lastname", "06000",false);
+		
+		Mockito.when(userRepository.findById(id)).thenReturn(Optional.of(user));
+	
+		userService.activeUser(id);
+
+        Mockito.verify(userRepository).findById(id);
+	}
+	
+	@Test
+	public void testActivateUser_whenUserIdDoesNotExist_itShouldThrowUserNotFoundException() {
+		Long id = 1L;
+		Mockito.when(userRepository.findById(id)).thenReturn(Optional.empty());
+	
+		assertThrows(UserNotFoundException.class, () -> userService.activeUser(id));
+
+        Mockito.verify(userRepository).findById(id);
+        Mockito.verifyNoMoreInteractions(userRepository);
+	}
+	
+	@Test
+	public void testDeleteUser_whenUserIdExist_itShouldDeleteUser() {
+		Long id = 1L;
+
+		User user = new User(id,"firstname@gmail.com","FirstName", "Lastname", "06000",false);
+		
+		Mockito.when(userRepository.findById(id)).thenReturn(Optional.of(user));
+	
+		userService.deleteUser(id);
+
+        Mockito.verify(userRepository).findById(id);
+        Mockito.verify(userRepository).deleteById(id);
+	}
+	
+	@Test
+	public void testDeleteUser_whenUserIdDoesNotExist_itShouldThrowUserNotFoundException() {
+		Long id = 1L;
+		Mockito.when(userRepository.findById(id)).thenReturn(Optional.empty());
+	
+		assertThrows(UserNotFoundException.class, () -> userService.deleteUser(id));
+
+        Mockito.verify(userRepository).findById(id);
+        Mockito.verifyNoMoreInteractions(userRepository);
 	}
 
 }
