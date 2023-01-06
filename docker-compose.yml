@@ -1,0 +1,19 @@
+version: '2.13.0'
+services: 
+  app:
+    container_name: ecommerce
+    image: ecommerce
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on: 
+      - postgres
+  postgres:
+    container_name: ecommercedb
+    image: postgres
+    ports:
+      - "5432-5432"
+    environment:
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=ecommerce
