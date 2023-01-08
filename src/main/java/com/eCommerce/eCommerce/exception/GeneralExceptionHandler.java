@@ -17,4 +17,9 @@ public class GeneralExceptionHandler {
 	public ResponseEntity<?> handle(UserNotActiveException exception){
 		return new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler(UserDetailsNotFoundException.class)
+	public ResponseEntity<?> handle(UserDetailsNotFoundException exception){
+		return new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
+	}
 }
