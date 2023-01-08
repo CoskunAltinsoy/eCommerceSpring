@@ -42,16 +42,16 @@ public class UserDetails {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	private User users;
+	private User user;
 
-	public UserDetails(String phoneNumber, String address, String city, String country, String postCode, User users) {
+	public UserDetails(String phoneNumber, String address, String city, String country, String postCode, User user) {
 		super();
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.city = city;
 		this.country = country;
 		this.postCode = postCode;
-		this.users = users;
+		this.user = user;
 	} 
 	
 	

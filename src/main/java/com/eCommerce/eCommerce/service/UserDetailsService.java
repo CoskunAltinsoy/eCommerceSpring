@@ -1,5 +1,6 @@
 package com.eCommerce.eCommerce.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eCommerce.eCommerce.dto.userDetailsDtos.CreateUserDetailsRequest;
@@ -18,6 +19,7 @@ public class UserDetailsService {
 	private final UserService userService;
 	private final UserDetailsConverter userDetailsConverter;
 	
+	@Autowired
 	public UserDetailsService(UserDetailsRepository userDetailsRepository, UserService userService,
 			                  UserDetailsConverter userDetailsConverter) {
 		this.userDetailsRepository = userDetailsRepository;
