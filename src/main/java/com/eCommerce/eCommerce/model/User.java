@@ -1,6 +1,6 @@
 package com.eCommerce.eCommerce.model;
 
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -42,7 +42,7 @@ public class User extends BaseEntity {
 	private Boolean isActive;
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<UserDetails> userDetails;
+	private List<UserDetails> userDetails;
 	
 	public User(String email, String firstName, String lastName, Boolean isActive) {
 		super();

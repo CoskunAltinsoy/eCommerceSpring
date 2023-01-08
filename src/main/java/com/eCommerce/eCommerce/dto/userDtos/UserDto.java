@@ -1,5 +1,9 @@
 package com.eCommerce.eCommerce.dto.userDtos;
 
+import java.util.List;
+
+import com.eCommerce.eCommerce.dto.userDetailsDtos.UserDetailsDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,4 +17,5 @@ public class UserDto {
     private String firstName;
 	private String lastName;
 	private boolean isActive;
+	private List<UserDetailsDto> userDetailsDto;
 }
