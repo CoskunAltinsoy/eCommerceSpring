@@ -1,4 +1,4 @@
-package com.eCommerce.eCommerce.service.requests.users;
+package com.eCommerce.eCommerce.dto.userDtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateUserRequest {
+public class UserDto {
 	private Long id;
 	private String email;
-	private String firstName;
+    private String firstName;
 	private String lastName;
+	private boolean isActive;
 }

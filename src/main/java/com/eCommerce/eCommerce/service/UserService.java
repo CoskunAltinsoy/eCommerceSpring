@@ -1,20 +1,19 @@
 package com.eCommerce.eCommerce.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.eCommerce.eCommerce.dto.UserDto;
+import com.eCommerce.eCommerce.dto.userDtos.CreateUserRequest;
+import com.eCommerce.eCommerce.dto.userDtos.UpdateUserRequest;
+import com.eCommerce.eCommerce.dto.userDtos.UserDto;
 import com.eCommerce.eCommerce.exception.UserNotActiveException;
 import com.eCommerce.eCommerce.exception.UserNotFoundException;
 import com.eCommerce.eCommerce.model.User;
 import com.eCommerce.eCommerce.repository.UserRepository;
 import com.eCommerce.eCommerce.service.converter.UserConverter;
-import com.eCommerce.eCommerce.service.requests.users.CreateUserRequest;
-import com.eCommerce.eCommerce.service.requests.users.UpdateUserRequest;
 
 import ch.qos.logback.classic.Logger;
 
@@ -75,7 +74,7 @@ public class UserService {
 		this.userRepository.deleteById(id);
 	}
 	
-	private User findUserById(Long id) {
+	protected User findUserById(Long id) {
 		return this.userRepository.findById(id)
 		           .orElseThrow(() -> new UserNotFoundException("User couldn't be found "+id));
 	}

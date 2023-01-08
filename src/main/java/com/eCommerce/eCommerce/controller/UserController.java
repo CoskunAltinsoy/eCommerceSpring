@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.eCommerce.eCommerce.dto.UserDto;
+import com.eCommerce.eCommerce.dto.userDtos.CreateUserRequest;
+import com.eCommerce.eCommerce.dto.userDtos.UpdateUserRequest;
+import com.eCommerce.eCommerce.dto.userDtos.UserDto;
 import com.eCommerce.eCommerce.model.User;
 import com.eCommerce.eCommerce.service.UserService;
-import com.eCommerce.eCommerce.service.requests.users.CreateUserRequest;
-import com.eCommerce.eCommerce.service.requests.users.UpdateUserRequest;
 
 @RestController
 @RequestMapping("api/users")

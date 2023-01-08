@@ -10,14 +10,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import com.eCommerce.eCommerce.dto.UserDto;
+import com.eCommerce.eCommerce.dto.userDtos.CreateUserRequest;
+import com.eCommerce.eCommerce.dto.userDtos.UpdateUserRequest;
+import com.eCommerce.eCommerce.dto.userDtos.UserDto;
 import com.eCommerce.eCommerce.exception.UserNotActiveException;
 import com.eCommerce.eCommerce.exception.UserNotFoundException;
 import com.eCommerce.eCommerce.model.User;
 import com.eCommerce.eCommerce.repository.UserRepository;
 import com.eCommerce.eCommerce.service.converter.UserConverter;
-import com.eCommerce.eCommerce.service.requests.users.CreateUserRequest;
-import com.eCommerce.eCommerce.service.requests.users.UpdateUserRequest;
 
 class UserServiceTest extends TestSupport{
 

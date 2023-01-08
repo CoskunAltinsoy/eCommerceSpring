@@ -2,8 +2,10 @@ package com.eCommerce.eCommerce.model;
 
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,7 +41,7 @@ public class User extends BaseEntity {
 	@Column(name = "is_active")
 	private Boolean isActive;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<UserDetails> userDetails;
 	
 	public User(String email, String firstName, String lastName, Boolean isActive) {

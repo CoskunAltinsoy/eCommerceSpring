@@ -2,6 +2,7 @@ package com.eCommerce.eCommerce.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,7 +40,19 @@ public class UserDetails {
 	@Column(name = "post_code")
 	private String postCode;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	private User users; 
+	private User users;
+
+	public UserDetails(String phoneNumber, String address, String city, String country, String postCode, User users) {
+		super();
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.city = city;
+		this.country = country;
+		this.postCode = postCode;
+		this.users = users;
+	} 
+	
+	
 }

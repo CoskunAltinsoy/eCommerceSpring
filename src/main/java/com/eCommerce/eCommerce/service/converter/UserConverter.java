@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.eCommerce.eCommerce.dto.UserDto;
+import com.eCommerce.eCommerce.dto.userDtos.UserDto;
 import com.eCommerce.eCommerce.model.User;
 
 @Component

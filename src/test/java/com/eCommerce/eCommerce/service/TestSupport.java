@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import com.eCommerce.eCommerce.dto.UserDto;
+import com.eCommerce.eCommerce.dto.userDtos.UserDto;
 import com.eCommerce.eCommerce.model.User;
 
 public class TestSupport {
