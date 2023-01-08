@@ -13,12 +13,12 @@ public class UserConverter {
 
 	public UserDto convert(User from) {
 		return new UserDto(from.getId(),from.getEmail(), from.getFirstName(),
-				                       from.getLastName(), from.getPostalCode(),from.getIsActive());
+				                       from.getLastName(),from.getIsActive());
 	}
 
 	public List<UserDto> convert(List<User> fromList) {
 		return fromList.stream().map(from -> new UserDto(from.getId(),from.getEmail(), from.getFirstName(),
-				                from.getLastName(), from.getPostalCode(), from.getIsActive()))
+				                from.getLastName(), from.getIsActive()))
 				                .collect(Collectors.toList());
 	}
 }

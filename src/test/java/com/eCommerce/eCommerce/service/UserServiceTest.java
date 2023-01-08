@@ -83,10 +83,10 @@ class UserServiceTest extends TestSupport{
 	public void testCreateUser_itShouldReturnCreatedUserDto() {
 		String email = "firstname@gmail.com";
 		CreateUserRequest createUserRequest = 
-				new CreateUserRequest(email,"FirstName", "Lastname", "06000");
-		User user = new User(email, "FirstName", "Lastname", "06000", true);
-		User savedUser = new User(email, "FirstName", "Lastname", "06000", true);
-		UserDto userDto = new UserDto(1L, email, "FirstName", "Lastname", "06000", true);
+				new CreateUserRequest(email,"FirstName", "Lastname");
+		User user = new User(email, "FirstName", "Lastname", true);
+		User savedUser = new User(email, "FirstName", "Lastname", true);
+		UserDto userDto = new UserDto(1L, email, "FirstName", "Lastname", true);
 		
 		Mockito.when(userRepository.save(user)).thenReturn(savedUser);
 		Mockito.when(userConverter.convert(savedUser)).thenReturn(userDto);
@@ -103,11 +103,11 @@ class UserServiceTest extends TestSupport{
 	public void testUpdateUser_whenUserIdExistAndUserIsAcive_itShouldReturnUpdatedUserDto() {
 		Long id = 1L;
 		UpdateUserRequest updateUserRequest = 
-				new UpdateUserRequest(1L,"firstname@gmail.com","FirstName2", "Lastname2", "06600");
-		User user = new User(1L, "firstname@gmail.com", "FirstName", "Lastname", "06000", true);
-		User updateUser = new User(1L, "firstname@gmail.com", "FirstName2", "Lastname2", "06600", true);
-		User savedUser = new User(1L, "firstname@gmail.com", "FirstName2", "Lastname2", "06600", true);
-		UserDto userDto = new UserDto(1L, "firstname@gmail.com", "FirstName2", "Lastname2", "06600", true);
+				new UpdateUserRequest(1L,"firstname@gmail.com","FirstName2", "Lastname2");
+		User user = new User(1L, "firstname@gmail.com", "FirstName", "Lastname", true);
+		User updateUser = new User(1L, "firstname@gmail.com", "FirstName2", "Lastname2", true);
+		User savedUser = new User(1L, "firstname@gmail.com", "FirstName2", "Lastname2", true);
+		UserDto userDto = new UserDto(1L, "firstname@gmail.com", "FirstName2", "Lastname2", true);
 		
 		Mockito.when(userRepository.findById(id)).thenReturn(Optional.of(user));
 		Mockito.when(userRepository.save(updateUser)).thenReturn(savedUser);
@@ -126,7 +126,7 @@ class UserServiceTest extends TestSupport{
 	public void testUpdateUser_whenUserIdDoesNotExist_itShouldThrowUserNotFoundException() {
 		Long id = 1L;
 		UpdateUserRequest updateUserRequest = 
-				new UpdateUserRequest(1L,"firstname@gmail.com","FirstName2", "Lastname2", "06600");
+				new UpdateUserRequest(1L,"firstname@gmail.com","FirstName2", "Lastname2");
 		
 		Mockito.when(userRepository.findById(id)).thenReturn(Optional.empty());
 	
@@ -141,8 +141,8 @@ class UserServiceTest extends TestSupport{
 	public void testUpdateUser_whenUserIdExistButUserIsIdNotActive_itShouldThrowUserNotActiveException() {
 		Long id = 1L;
 		UpdateUserRequest updateUserRequest = 
-				new UpdateUserRequest(id,"firstname@gmail.com","FirstName2", "Lastname2", "06600");
-		User user = new User(id,"firstname@gmail.com","FirstName", "Lastname", "06000",false);
+				new UpdateUserRequest(id,"firstname@gmail.com","FirstName2", "Lastname2");
+		User user = new User(id,"firstname@gmail.com","FirstName", "Lastname",false);
 		
 		Mockito.when(userRepository.findById(id)).thenReturn(Optional.of(user));
 	
@@ -157,7 +157,7 @@ class UserServiceTest extends TestSupport{
 	public void testDeactivateUser_whenUserIdExist_itShouldUpdateUserByActivateFalse() {
 		Long id = 1L;
 
-		User user = new User(id,"firstname@gmail.com","FirstName", "Lastname", "06000",true);
+		User user = new User(id,"firstname@gmail.com","FirstName", "Lastname",true);
 		
 		Mockito.when(userRepository.findById(id)).thenReturn(Optional.of(user));
 	
@@ -181,7 +181,7 @@ class UserServiceTest extends TestSupport{
 	public void testActivateUser_whenUserIdExist_itShouldUpdateUserByActivateTrue() {
 		Long id = 1L;
 
-		User user = new User(id,"firstname@gmail.com","FirstName", "Lastname", "06000",false);
+		User user = new User(id,"firstname@gmail.com","FirstName", "Lastname", false);
 		
 		Mockito.when(userRepository.findById(id)).thenReturn(Optional.of(user));
 	
@@ -205,7 +205,7 @@ class UserServiceTest extends TestSupport{
 	public void testDeleteUser_whenUserIdExist_itShouldDeleteUser() {
 		Long id = 1L;
 
-		User user = new User(id,"firstname@gmail.com","FirstName", "Lastname", "06000",false);
+		User user = new User(id,"firstname@gmail.com","FirstName", "Lastname", false);
 		
 		Mockito.when(userRepository.findById(id)).thenReturn(Optional.of(user));
 	

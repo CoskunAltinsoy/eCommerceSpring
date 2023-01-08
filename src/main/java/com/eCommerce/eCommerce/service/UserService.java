@@ -46,7 +46,7 @@ public class UserService {
 	
 	public UserDto createUser(CreateUserRequest createUserRequest) {
 		User user = new User(createUserRequest.getEmail(),createUserRequest.getFirstName(),
-				             createUserRequest.getLastName(), createUserRequest.getPostalCode(),
+				             createUserRequest.getLastName(),
 				             true);
 		return this.userConverter.convert(userRepository.save(user));
 	}
@@ -57,7 +57,6 @@ public class UserService {
 		user.setEmail(updateUserRequest.getEmail());
 		user.setFirstName(updateUserRequest.getFirstName());
 		user.setLastName(updateUserRequest.getLastName());
-		user.setPostalCode(updateUserRequest.getPostalCode());
 		return this.userConverter.convert(userRepository.save(user));
 	}
 	

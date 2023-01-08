@@ -16,7 +16,6 @@ public class TestSupport {
 				                i+"coskun.altinsoy@gmail.com",
 				                i+"firstName",
 				                i+"lastName",
-				                i+"postalcode",
 				                new Random(2).nextBoolean())).collect(Collectors.toList());
 	}
 	
@@ -26,7 +25,6 @@ public class TestSupport {
 		                        	from.getEmail(),
 		                        	from.getFirstName(),
 		                        	from.getLastName(),
-		                        	from.getPostalCode(),
 		                        	from.getIsActive())).collect(Collectors.toList());
 	}
 	
@@ -35,7 +33,6 @@ public class TestSupport {
 				"coskun.altinsoy@gmail.com",
                 "firstName",
                 "lastName",
-                "postalcode",
                 true);
 	}
 	
@@ -44,7 +41,6 @@ public class TestSupport {
 				"coskun.altinsoy@gmail.com",
                 "firstName",
                 "lastName",
-                "postalcode",
                 true);
 	}
 }
