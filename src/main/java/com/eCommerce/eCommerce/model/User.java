@@ -1,5 +1,6 @@
 package com.eCommerce.eCommerce.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -51,6 +52,17 @@ public class User extends BaseEntity {
 		this.lastName = lastName;
 		this.isActive = isActive;
 	}
+
+	public User(Long id, String email, String firstName, String lastName, Boolean isActive) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.isActive = isActive;
+	}
+
+
 	
 	
 	

@@ -86,7 +86,7 @@ class UserServiceTest extends TestSupport{
 				new CreateUserRequest(email,"FirstName", "Lastname");
 		User user = new User(email, "FirstName", "Lastname", true);
 		User savedUser = new User(email, "FirstName", "Lastname", true);
-		UserDto userDto = new UserDto(1L, email, "FirstName", "Lastname", true);
+		UserDto userDto = generateUserDto(1L);//new UserDto(1L, email, "FirstName", "Lastname", true);
 		
 		Mockito.when(userRepository.save(user)).thenReturn(savedUser);
 		Mockito.when(userConverter.convert(savedUser)).thenReturn(userDto);
@@ -107,7 +107,7 @@ class UserServiceTest extends TestSupport{
 		User user = new User(1L, "firstname@gmail.com", "FirstName", "Lastname", true);
 		User updateUser = new User(1L, "firstname@gmail.com", "FirstName2", "Lastname2", true);
 		User savedUser = new User(1L, "firstname@gmail.com", "FirstName2", "Lastname2", true);
-		UserDto userDto = new UserDto(1L, "firstname@gmail.com", "FirstName2", "Lastname2", true);
+		UserDto userDto = generateUserDto(id);//new UserDto(1L, "firstname@gmail.com", "FirstName2", "Lastname2", true);
 		
 		Mockito.when(userRepository.findById(id)).thenReturn(Optional.of(user));
 		Mockito.when(userRepository.save(updateUser)).thenReturn(savedUser);
