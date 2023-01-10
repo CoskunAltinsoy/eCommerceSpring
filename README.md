@@ -1,0 +1,12 @@
+## Technologies, Tools And Techniques Used
+- Java
+- Spring Boot
+- N-Tier Architecture
+- JPA/Hibernate
+- Maven
+- Lombok
+- Exception Handling
+- PostgreSQL
+- Redis
+- JUnit
+- Mockito
