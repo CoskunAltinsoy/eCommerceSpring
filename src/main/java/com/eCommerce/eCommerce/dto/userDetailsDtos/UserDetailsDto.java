@@ -1,5 +1,7 @@
 package com.eCommerce.eCommerce.dto.userDetailsDtos;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDetailsDto {
+public class UserDetailsDto implements Serializable{
 
 	private String phoneNumber;
 	private String address;

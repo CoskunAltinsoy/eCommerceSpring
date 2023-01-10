@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.eCommerce.eCommerce.dto.userDtos.CreateUserRequest;
@@ -32,6 +35,7 @@ public class UserService {
 		this.userConverter = userConverter;
 	}
 	
+	@Cacheable(value = "users")
 	public List<UserDto> getAllUsers() {
 //		return this.userRepository.findAll().stream().map(u -> userConverter.convert(u))
 //				                                           .collect(Collectors.toList());
@@ -43,6 +47,7 @@ public class UserService {
 		return this.userConverter.convert(user);
 	}
 	
+	@CachePut(value = "users", key ="#id")
 	public UserDto createUser(CreateUserRequest createUserRequest) {
 		User user = new User(createUserRequest.getEmail(),createUserRequest.getFirstName(),
 				             createUserRequest.getLastName(),
@@ -50,6 +55,7 @@ public class UserService {
 		return this.userConverter.convert(userRepository.save(user));
 	}
 	
+	@CacheEvict(value = "users", allEntries = true)
 	public UserDto updateUser(UpdateUserRequest updateUserRequest) {
 		checkUserActivation(updateUserRequest.getId());
 		User user = findUserById(updateUserRequest.getId());
@@ -69,6 +75,7 @@ public class UserService {
 		user.setIsActive(true);
 	}
 	
+	@CacheEvict(value = "users", allEntries = true)
 	public void deleteUser(Long id) {
 		findUserById(id);
 		this.userRepository.deleteById(id);
