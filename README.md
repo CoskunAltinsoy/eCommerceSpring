@@ -10,3 +10,4 @@
 - Redis
 - JUnit
 - Mockito
+- Docker Compose
