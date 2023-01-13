@@ -1,6 +1,5 @@
 package com.eCommerce.eCommerce.dto.userDtos;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
